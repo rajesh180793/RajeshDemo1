@@ -6,7 +6,7 @@ pipeline {
 				echo 'Running Build Automation',
 				archiveArtifacts artifacts: 'dist/trainschedule.zip'
 			}
-		}
+	     }
 		stage('DeployToStaging') {
 			when {
 				branch 'master'
