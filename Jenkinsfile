@@ -3,7 +3,7 @@ pipeline {
 	stages {
 	    stage('Build') {
 			steps {
-				echo 'Running Build Automation'
+				echo 'Running Build Automation',
 				archiveArtifacts artifacts: 'dist/trainschedule.zip'
 			}
 		}
@@ -16,16 +16,16 @@ pipeline {
 					sshPublisher(
 						publishers: [
 							sshPublisherDesc(
-								configName: 'staging'
-								sshCredentials: [
-									username: "$USERNAME"
+								configName: 'staging',
+								sshCredentials: [,
+									username: "$USERNAME",
 									Password: "$USERPASS"
 						],
 						transfers: [
 							sshTransfer(
-								sourceFiles: 'dist/trainschedule.zip'
-								removePrefix: 'dist/'
-								remoteDirectory: '/tmp'
+								sourceFiles: 'dist/trainschedule.zip',
+								removePrefix: 'dist/',
+								remoteDirectory: '/tmp',
 								execCommand: 'sudo /usr/bin/systemctl stop train-schedule && rm -rf /opt/train-schedule/* && unzip /tmp/trainschedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
 							)
 						]
